@@ -56,7 +56,7 @@ socket.on('chat', (data) => {
     p2.textContent = `${data.message}`;
     messages.append(p1, p2)
     scrollToBottom()
-    //why is this???
+    //This is the chat message input field going empty after hit enter or click
     message.value = "";
 })
 
