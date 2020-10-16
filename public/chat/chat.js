@@ -1,3 +1,6 @@
+//const e = require("express");
+
+(function(){
 //Make connection with socketio from the front end
 const socket = io();
 
@@ -5,13 +8,11 @@ const socket = io();
 //Variables to work on DOM
 const sender = document.getElementById('sender');
 const messageInput = document.getElementById('message');
-const btn = document.querySelector('button');
+const btn = document.querySelector('#text-msg-btn');
 const task = document.getElementById('task');
 let em = document.createElement('em');
 const messages = document.getElementById('messages');
-//Use params
-let query = window.location.search.substring(1);
-let params = JSON.parse('{"' + decodeURI(query).replace(/&/g, '","').replace(/\+/g, ' ').replace(/=/g, '":"') + '"}');
+const returnBtn = document.querySelector('.return-btn');
 
 
 
@@ -20,16 +21,10 @@ let params = JSON.parse('{"' + decodeURI(query).replace(/&/g, '","').replace(/\+
 //Final socket connection that affects the front end
 //On connect do smth
 socket.on('connect', function () {
-    console.log('Connected to server')
-
-    socket.emit('create', params, function (err) {
-        if (err) {
-            alert('err in joining');
-            location.href = '/';
-        } else {
-            console.log('joined');
-        }
-    })
+    //Use params
+    let query = window.location.search.substring(1);
+    let params = JSON.parse('{"' + decodeURI(query).replace(/&/g, '","').replace(/\+/g, ' ').replace(/=/g, '":"') + '"}');
+    socket.emit('create', params)
 });
 
 socket.on('Admin', (data) => {
@@ -44,16 +39,20 @@ socket.on('chat', (data) => {
     //appends the message
     const p1 = document.createElement('p');
     const p2 = document.createElement('p');
-    if (data.sender && data.time) {
-        console.log('hey')
+    if (data.user) {
         const span = document.createElement('span');
         const b = document.createElement('b');
-        b.textContent = `${data.sender} `;
-        const t = getDateFrom(data.time);
+        b.textContent = `${data.user.name} `;
+        const t = getDateFrom(data.textData.time);
         span.textContent = t;
         p1.append(b, span)
+        p2.textContent = `${data.textData.message}`;
+        p2.classList.add('new-text');
+        
+    }else{
+        p2.textContent = data.message;
+        p2.classList.add('user-log');
     }
-    p2.textContent = `${data.message}`;
     messages.append(p1, p2)
     scrollToBottom()
     //This is the chat message input field going empty after hit enter or click
@@ -73,6 +72,16 @@ socket.on('endTyping', () => {
     task.append(em);
 })
 
+socket.on('appendUser', function(users){
+    let user_list = document.getElementById('user-list-wrapper');
+    user_list.innerHTML="";
+    for(let user of users){
+        const li = document.createElement('li');
+        li.innerText = user.name;
+        user_list.append(li);
+    }
+})
+
 
 
 //functions 
@@ -82,17 +91,6 @@ function scrollToBottom() {
     if (scrollDiff < 300) {
         messageContainer.scrollTop = messageContainer.scrollHeight;
     }
-}
-
-
-//Add Users to side bar
-function createUserList() {
-    const userDiv = document.querySelector('.side-section-container');
-    const ul = document.createElement('ul');
-    const li = document.createElement('li');
-    li.textContent = params.name;
-    ul.append(li);
-    userDiv.append(ul);
 }
 
 function getDateFrom(time) {
@@ -115,11 +113,13 @@ function getDateFrom(time) {
 btn.addEventListener('click', function () {
     socket.emit('chat', {
         message: messageInput.value,
-        sender: sender.value,
         time: new Date().getTime(),
-        params
     })
     return false;
+})
+
+returnBtn.addEventListener('click', (e) => {
+    window.location.href = "../index.html"
 })
 
 //Event listener for chat emit - enter
@@ -130,9 +130,7 @@ messageInput.addEventListener('keyup', function (event) {
         //emits to backend
         socket.emit('chat', {
             message: messageInput.value,
-            sender: sender.value,
             time: new Date().getTime(),
-            params
         })
     }
     return false;
@@ -142,7 +140,7 @@ messageInput.addEventListener('keyup', function (event) {
 messageInput.addEventListener('keyup', function (event) {
 
     if (event.keyCode === 8 && messageInput.value === "") {
-        socket.emit('endTyping', params);
+        socket.emit('endTyping');
     }
     return false;
 
@@ -150,6 +148,8 @@ messageInput.addEventListener('keyup', function (event) {
 
 //Event listener for Typing emit - keypress
 messageInput.addEventListener('keypress', function () {
-    socket.emit('typing', [sender.value, params]);
+    socket.emit('typing');
     return false;
 })
+
+})()

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websockets chat box</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/home/home.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <!-- Nav section -->
+    <div class="nav-container">
+        <div class="logo">
+            <div class="red"></div>
+            <div class="blue"></div>
+            <div class="green"></div>
+        </div>
+        <div class="logo-name">101 REALCHAT</div>
+    </div>
+
+    <!-- Side section -->
+    <div class="chat-page">
+        <div class="side-section-container">
+            <div class="side-section-elements">
+                <h3>Welcome, Active Users</h3>
+                <ul id="user-list-wrapper"></ul>
+            </div>
+            <div class="return-btn">
+                <button><span>Return</span></button>
+            </div>
+        </div>
+
+        <!-- Main section -->
+        <div class="chat-container">
+            <div id="messages-window-wrapper">
+                <p id="user-log"></p>
+                <div id="messages"></div>
+                <p id="task"></p>
+            </div>
+            <div class="input-footer-wrapper">
+                <input id="message" placeholder="Message" type="text">
+                <button type="submit" name="action" id="text-msg-btn"><span>Submit</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="ad-container">
+            <div class="ad-text">
+                <p>I AM AN AD CONTAINER</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="chat.js"></script>
+
+</html>

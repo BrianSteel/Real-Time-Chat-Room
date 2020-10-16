@@ -5,52 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat login</title>
-    <link rel="stylesheet" href="/index.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background: teal;
-            
-        }
-
-        h3 {
-            margin: 0;  
-        }
-
-        form {
-            border: 2px solid #ddd;
-            background: white;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            width: 20%;
-            text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%)
-        }
-    </style>
-    <script>
-        document.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-            }
-        })
-
-    </script>
+    <link rel="stylesheet" href="home/home.css">
 </head>
 
 
 <body>
-    <form action="./chat.html">
-        <h3>Join Chat</h3>
-        <input type="text" name="name" placeholder="Name" autofocus>
-        <input type="text" name="room" placeholder="Chat Room Name" autofocus>
-       <!--  <input type="text" name="RoomNumber" placeholder="Number of users" autofocus> -->
-        <button>Enter</button>
-    </form>
+    <div class="nav-container">
+        <div class="logo">
+            <div class="red"></div>
+            <div class="blue"></div>
+            <div class="green"></div>
+        </div>
+        <div class="logo-name">101 REALCHAT</div>
+    </div>
+    <div class="main">
+        <div id="chat-list-container">
+            <div class="title-button-section">
+                <h3>Chat List</h3>
+                <div class="btn"><span id="add-btn">+</span></div>
+            </div>
+            <table id="table" style="width:100%"></table>
+            <div id="no-table"></div>
+        </div>
+        <form action="/chat/chat.html" id="join-room-container" class="display">
+            <div class="title-new-room">Make A Chat Room</div>
+            <div class="back-icon">
+                <img src="img/backIcon.svg"></img>
+            </div>
+            <div class="new-chat-input">
+                <label for="name">Name</label>
+                <input name="name" placeholder="name" type="text" autofocus required>
+            </div>
+            <div class="new-chat-input">
+                <label class="chat-room-label" for="room">Chat Room Name</label>
+                <input id="room-name-input" name="room" placeholder="Chat room name" type="text" autofocus required>
+            </div>
+            <button class="submit-btn"><span>Scoop In</span></button>
+        </form>
+    </div>
 </body>
+<script src="/home/home.js"></script>
 
 </html>
