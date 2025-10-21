@@ -155,6 +155,16 @@ html, body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.input-footer-wrapper button.active {
+    background: #430000;
+}
+
+.input-footer-wrapper button.active:hover {
+    background: #2d0000;
+    transform: scale(1.04);
 }
 
 .input-footer-wrapper button span {
