@@ -12,7 +12,16 @@ const btn = document.querySelector('#text-msg-btn');
 const task = document.getElementById('task');
 let em = document.createElement('em');
 const messages = document.getElementById('messages');
+const messageWindow = messages;
 const returnBtn = document.querySelector('.return-btn');
+
+messageInput.addEventListener('input', () => {
+    if (messageInput.value.trim()) {
+        btn.classList.add('active');
+    } else {
+        btn.classList.remove('active');
+    }
+})
 
 
 
@@ -30,6 +39,27 @@ socket.on('connect', function () {
 socket.on('Admin', (data) => {
     const p = document.getElementById('user-log');
     p.innerText = data.message;
+})
+
+socket.on('joinError', (data) => {
+    alert(data.message);
+    window.location.href = '../index.html';
+})
+
+socket.on('history', (messages) => {
+    messages.forEach((data) => {
+        const p1 = document.createElement('p');
+        const p2 = document.createElement('p');
+        const b = document.createElement('b');
+        const span = document.createElement('span');
+        b.textContent = `${data.name} `;
+        span.textContent = getDateFrom(new Date(data.time).getTime());
+        p1.append(b, span);
+        p2.textContent = data.message;
+        p2.classList.add('new-text');
+        messageWindow.append(p1, p2);
+    });
+    scrollToBottom();
 })
 
 //Listen for backend socket event and add messages
@@ -56,7 +86,8 @@ socket.on('chat', (data) => {
     messages.append(p1, p2)
     scrollToBottom()
     //This is the chat message input field going empty after hit enter or click
-    message.value = "";
+    messageInput.value = "";
+    btn.classList.remove('active');
 })
 
 //Listen for backend socket event and typing of user
@@ -95,8 +126,9 @@ function scrollToBottom() {
 
 function getDateFrom(time) {
     const newDate = new Date(time)
-    const t = `${newDate.getHours()} : ${newDate.getMinutes()}`
-    return t;
+    const h = String(newDate.getHours()).padStart(2, '0');
+    const m = String(newDate.getMinutes()).padStart(2, '0');
+    return `${h}:${m}`;
 }
 
 
@@ -111,6 +143,7 @@ function getDateFrom(time) {
 //Event listeners
 //Event listener for chat emit - click
 btn.addEventListener('click', function () {
+    if (!messageInput.value.trim()) return false;
     socket.emit('chat', {
         message: messageInput.value,
         time: new Date().getTime(),
@@ -125,9 +158,8 @@ returnBtn.addEventListener('click', (e) => {
 //Event listener for chat emit - enter
 messageInput.addEventListener('keyup', function (event) {
     if (event.keyCode === 13) {
-        //cancel any default action if any
         event.preventDefault();
-        //emits to backend
+        if (!messageInput.value.trim()) return false;
         socket.emit('chat', {
             message: messageInput.value,
             time: new Date().getTime(),
