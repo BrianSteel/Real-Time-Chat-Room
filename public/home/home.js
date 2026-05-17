@@ -62,6 +62,7 @@
                         return (i.toString() === td3.id);
                     })
                     room_input.value = joinInputValue[0].room_name;
+                    updateSubmitBtn();
                 })
             })
         } else {
