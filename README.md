@@ -4,6 +4,8 @@ A real-time chat application where users can create and join chat rooms, send me
 
 **Tech Stack:** Node.js · Express · Socket.IO · MongoDB · Vanilla JavaScript
 
+![Demo](public/img/real-time-chat-demo.png)
+
 ---
 
 ## Features
@@ -24,31 +26,24 @@ A real-time chat application where users can create and join chat rooms, send me
 ## Setup
 
 ```bash
-# Install dependencies
 npm install
-
-# Copy env file and fill in your values
 cp .env.example .env
 ```
 
 ### Local MongoDB
 
-Start your local MongoDB server:
-
 ```bash
 # macOS/Linux
 mongod
-
-# Windows — MongoDB starts as a service automatically
 ```
 
-Leave `MONGODB_URI` in `.env` as the default `mongodb://localhost/listOfUsers`.
+Leave `MONGODB_URI` as the default in `.env`.
 
 ### MongoDB Atlas (Cloud)
 
 1. Create a free account at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 2. Create a cluster and get your connection string
-3. Set it in your `.env`:
+3. Set it in `.env`:
 
 ```
 MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/listOfUsers
@@ -57,21 +52,11 @@ MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/listOfUsers
 ## Running
 
 ```bash
-# Production
-npm start
-
-# Development (auto-reload)
-npm run dev
+npm start        # production
+npm run dev      # development (auto-reload)
 ```
 
-Then open `http://localhost:4000`.
-
-## Environment Variables
-
-| Variable      | Description                   | Default                           |
-|---------------|-------------------------------|-----------------------------------|
-| `MONGODB_URI` | MongoDB connection string     | `mongodb://localhost/listOfUsers` |
-| `PORT`        | Port the server listens on    | `4000`                            |
+Open `http://localhost:4000`.
 
 ## Project Structure
 
@@ -87,18 +72,3 @@ Then open `http://localhost:4000`.
 │   └── message.js        # Schema for message persistence
 └── package.json
 ```
-
-## Improvements Made
-
-- **Environment variables** — `MONGODB_URI` and `PORT` via `.env` instead of hardcoded values
-- **Message persistence** — Messages saved to MongoDB; last 50 loaded on room join
-- **Validation** — Empty name/room blocked on client and server; duplicate usernames per room rejected
-- **Security** — Helmet middleware added (XSS protection, clickjacking prevention, MIME sniffing protection)
-- **npm scripts** — `npm start` and `npm run dev` added
-- **README** — Setup instructions, env vars table, Atlas guide, troubleshooting
-
-## Troubleshooting
-
-**MongoDB connection error** — Ensure `mongod` is running and listening on `localhost:27017`, or that your Atlas URI is correct.
-
-**Port 4000 already in use** — Set `PORT=YOUR_PORT` in your `.env` file.
