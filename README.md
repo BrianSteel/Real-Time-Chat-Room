@@ -25,6 +25,13 @@ A real-time chat application where users can create and join chat rooms, send me
 - Active user list per room
 - Join/leave notifications
 - Duplicate username prevention per room
+- First-time onboarding tour (click **New here?** in the nav to restart it)
+
+## Onboarding Tour
+
+A step-by-step coach marks tutorial runs on first visit — highlighting each UI element with a tooltip. It plays once on the home page and once in the chat room.
+
+To replay it, click the **New here?** button in the top-right of the nav. It clears the tutorial state and restarts from the beginning.
 
 ## Prerequisites
 
