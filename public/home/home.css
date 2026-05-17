@@ -209,6 +209,16 @@ input{
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.submit-btn.active {
+    background: #430000;
+}
+
+.submit-btn.active:hover {
+    background: #2d0000;
+    transform: scale(1.04);
 }
 
 .submit-btn {

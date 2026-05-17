@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 //connects to mongodb database daving file
 //localhost means mongodb in our local pc
 //listOfUsers is the file whr it is saved
-const connect = mongoose.connect('mongodb://localhost/listOfUsers', { useNewUrlParser: true,  useUnifiedTopology: true});
+const connect = mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/listOfUsers');
 
 //this is to check for "connection" event to get established
 //console logs when there is a connection open even

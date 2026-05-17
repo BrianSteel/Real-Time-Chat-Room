@@ -6,7 +6,19 @@
     const joinRoomBox = document.querySelector('#join-room-container');
     const chatListBox = document.querySelector('#chat-list-container');
     const room_input = document.getElementById('room-name-input');
-    //const joinBtn = document.querySelector('.submit-btn');
+    const submitBtn = document.querySelector('.submit-btn');
+    const nameInput = document.querySelector('input[name="name"]');
+
+    function updateSubmitBtn() {
+        if (nameInput.value.trim() && room_input.value.trim()) {
+            submitBtn.classList.add('active');
+        } else {
+            submitBtn.classList.remove('active');
+        }
+    }
+
+    nameInput.addEventListener('input', updateSubmitBtn);
+    room_input.addEventListener('input', updateSubmitBtn);
 
     //fetch data from db to table
     async function getData() {
@@ -74,6 +86,14 @@
         room_input.value = "";
         chatListBox.classList.remove('display');
         joinRoomBox.classList.add('display');
+    })
+
+    // validate before submitting the form
+    document.getElementById('join-room-container').addEventListener('submit', (e) => {
+        if (!nameInput.value.trim() || !room_input.value.trim()) {
+            e.preventDefault();
+            alert('Please enter both a name and a room name.');
+        }
     })
 
     //prevents enter to go to chat html from login due to enter on the form
