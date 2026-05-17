@@ -2,7 +2,13 @@
 
 A real-time chat application where users can create and join chat rooms, send messages, and see live typing indicators.
 
-**Tech Stack:** Node.js · Express · Socket.IO · MongoDB · Vanilla JavaScript
+| Layer    | Technology                     |
+|----------|--------------------------------|
+| Frontend | Vanilla JavaScript, HTML, CSS  |
+| Backend  | Node.js, Express               |
+| Realtime | Socket.IO                      |
+| Database | MongoDB, Mongoose              |
+| Security | Helmet                         |
 
 ![Demo](public/img/real-time-chat-demo.png)
 
