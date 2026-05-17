@@ -1,124 +1,116 @@
 :root {
-    --width: 100%;
-    --halfWidth1: 325px;
-    --halfWidth2: 668px;
     --topColor: #FFF9F9;
     --bottomColor: rgba(255, 183, 183, 0.20);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--topColor) 50%, var(--bottomColor) 50%);
 }
 
-.nav-container{
-    background: linear-gradient(45deg,#0D0000,#430000);
-    height: 100px;
+.nav-container {
+    background: linear-gradient(45deg, #0D0000, #430000);
+    height: 70px;
     display: flex;
     align-items: center;
+    padding: 0 24px;
 }
 
-.logo{
+.logo {
     display: flex;
-    margin-left: 140px;
 }
 
 .red, .blue, .green {
-    width: 17px;
-    height: 17px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    margin-right: 7px;
+    margin-right: 6px;
 }
 
-.red{
-    background: red; 
-}
+.red { background: red; }
+.blue { background: #004CFF; }
+.green { background: #00AD3F; }
 
-.blue{
-    background: #004CFF;
-}
-
-.green{
-    background: #00AD3F;
-}
-
-.logo-name{
+.logo-name {
     color: #fff;
-    margin-left: 13px;
-    font-family: 'Montserrat';
+    margin-left: 12px;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size: 26px;
+    font-size: 22px;
 }
 
-.main{
-    height: 0px;
-    height: 0px;
-    border-top: var(--halfWidth1) solid var(--topColor);
-    border-right: var(--halfWidth2) solid var(--bottomColor);
-    border-bottom: var(--halfWidth1) solid var(--bottomColor); 
-    border-left: var(--halfWidth2) solid var(--topColor);
+.main {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
 }
 
 #chat-list-container {
-    position: absolute;
-    top: 200px; 
-    left: 430px;
-    width: 660px;
-    max-height: 500px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 70vh;
     overflow-y: auto;
-    background-color: rgba(255, 255, 255, 0.75);
-    padding-right: 30px;
-    padding-left: 10px;
-    padding-top: 20px;
-    padding-bottom: 50px;
-    box-sizing: border-box;
-    font-family: 'Poppins';
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px 24px 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    font-family: 'Poppins', sans-serif;
     color: #430000;
 }
 
-.title-button-section{
+.title-button-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-h3{
-    font-size: 20px;
-    margin-left: 67px;
+h3 {
+    font-size: 18px;
+    margin: 0;
 }
 
-.btn{
-    width: 50px;
-    height: 50px;
+.btn {
+    width: 44px;
+    height: 44px;
     background: #fff;
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .btn span {
-    font-size: 39px;
+    font-size: 32px;
     font-weight: bold;
     color: #5A5A5A;
+    line-height: 1;
 }
 
 .center-no-table {
     text-align: center;
 }
 
-table{
+table {
+    width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
+    border-collapse: collapse;
 }
 
 .room-col {
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .green-icon {
@@ -127,16 +119,20 @@ table{
     border: 1px solid #006625;
     border-radius: 50%;
     background: #00AD3F;
-    margin-right: 30px;
+    margin-right: 12px;
+    flex-shrink: 0;
 }
 
-th{
-    padding-bottom: 21px;
-}
-
-td{
+th {
+    padding-bottom: 16px;
     text-align: center;
-    padding-bottom: 19px;
+    font-size: 14px;
+}
+
+td {
+    text-align: center;
+    padding-bottom: 14px;
+    font-size: 14px;
 }
 
 .join-button {
@@ -144,72 +140,80 @@ td{
 }
 
 .join-button:hover {
-    color: red;
+    color: #430000;
+    font-weight: bold;
 }
 
-#join-room-container{
-    position: absolute;
-    top: 192px; 
-    left: 519px;
-    width: 481px;
-    height: 333px;
-    border-radius: 46px;
-    box-sizing: border-box;
-    font-family: 'Poppins';
+#join-room-container {
+    width: 100%;
+    max-width: 460px;
+    border-radius: 24px;
+    padding: 28px 32px 24px;
+    font-family: 'Poppins', sans-serif;
     background-color: #fff;
     color: #5A5A5A;
-    box-shadow: 15px 15px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.12);
+    position: relative;
 }
 
-.title-new-room{
-    margin-top: 20px;
+.title-new-room {
     text-align: center;
-    margin-bottom: 47px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 28px;
+    margin-top: 8px;
 }
 
-.back-icon{
+.back-icon {
     position: absolute;
-    top: 28px;
-    left: 53px;
+    top: 24px;
+    left: 24px;
     cursor: pointer;
 }
 
-.new-chat-input{
-    margin-left: 53px;
+.new-chat-input {
+    margin-bottom: 4px;
 }
 
 label {
     display: block;
     margin-bottom: 6px;
+    font-size: 14px;
 }
 
-.chat-room-label{
-    margin-top: 13px;
+.chat-room-label {
+    margin-top: 12px;
 }
 
-input{
+input {
     outline: none;
     border: none;
     border-bottom: 1px solid #707070;
     margin-bottom: 10px;
-    width: 378px;
-    padding: 3px;
-    font-family: Montserrat;
+    width: 100%;
+    padding: 6px 4px;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    background: transparent;
 }
 
-.submit-btn{
-    margin: 18px auto 0 auto;
+.submit-btn {
+    margin: 20px auto 0 auto;
     border: none;
     outline: none;
     background: #645B5B;
-    width: 157px;
-    height: 51px;
+    width: 140px;
+    height: 48px;
     border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: background 0.2s ease, transform 0.1s ease;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Montserrat, sans-serif;
+    color: white;
 }
 
 .submit-btn.active {
@@ -221,17 +225,50 @@ input{
     transform: scale(1.04);
 }
 
-.submit-btn {
-    font-size: 21px;
-    font-weight: bold;
-    font-family: Montserrat;
-    color: white;
-}
-
-
-
-
-
 .display {
     display: none;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 16px;
+    }
+
+    .logo-name {
+        font-size: 18px;
+    }
+
+    #chat-list-container {
+        max-width: 100%;
+    }
+
+    #join-room-container {
+        max-width: 100%;
+        border-radius: 16px;
+        padding: 24px 20px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .main {
+        align-items: flex-start;
+        padding: 16px 12px;
+    }
+
+    .logo-name {
+        font-size: 16px;
+    }
+
+    th, td {
+        font-size: 12px;
+        padding-bottom: 10px;
+    }
+
+    .submit-btn {
+        width: 120px;
+        height: 44px;
+        font-size: 16px;
+    }
 }
