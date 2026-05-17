@@ -10,6 +10,8 @@ A real-time chat application where users can create and join chat rooms, send me
 | Database | MongoDB, Mongoose              |
 | Security | Helmet                         |
 
+🔗 [Live Demo](https://real-time-chat-room-eerb.onrender.com)
+
 ![Demo](public/img/real-time-chat-demo.png)
 
 ---
